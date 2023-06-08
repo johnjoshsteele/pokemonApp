@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'PressStart2P-Regular';
+    src: url('/Users/scuser/Downloads/Press_Start_2P');
+}
+
+
+h1 {
+    font-family: PressStart2P-Regular;
+    color: #eeb7b7
+}
+
+p {
+    font-family: PressStart2P-Regular;
+    color: #eeb7b7;
+}
+
+.header {
+    background-image: url('../../assets/pokeBanner.jpeg');
+    background-size: cover;
+    height: 250px;
+
+} 
+
+.header img {
+    padding-left: 210px;
+    padding-top: 50px;
+}
+
+.card {
+    text-align: center;
+    border: 10px ridge white;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+    background-color: black;
+    box-shadow: 2px 2px 10px #ff0000;
+}
+
+.card p, .card h1{
+    color: #eeb7b7;
+    font-family: PressStart2P-Regular;
+}
+
+button {
+    color: #eeb7b7;
+    background-color: red;
+    border-radius: 20px;
+    margin-right: 20px;
+    padding: 10px 20px;
+    font-family: PressStart2P-Regular;
+    font-size: 16px;
+    display: inline-block;
+
+}
