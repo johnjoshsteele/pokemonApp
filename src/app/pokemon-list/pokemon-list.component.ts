@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { Observable, concatMap, map, tap } from 'rxjs';
 import { Pokemon } from '../models/pokemon';
@@ -11,11 +11,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./pokemon-list.component.scss']
 })
 
-export class PokemonListComponent {
+export class PokemonListComponent{
   public pokemon$: Observable<Pokemon[]>;
   public listSize : number = 12;
   public pageOffset : number = 0;
   public count!: number;
+  private firstVisit!: boolean;
 
   constructor(
     public pokemonService: PokemonService,
@@ -51,6 +52,7 @@ export class PokemonListComponent {
   }
 
   prevPage(){
+    this.prevSound()
 
     const offset = this.route.snapshot.queryParams['offset'] || 0;
     const size = this.route.snapshot.queryParams['size'] || 12;
@@ -67,7 +69,8 @@ export class PokemonListComponent {
     }
     
     nextPage(){
-      
+      this.nextSound()
+
       const offset = this.route.snapshot.queryParams['offset'] || 0;
       const size = this.route.snapshot.queryParams['size'] || 12;
       
@@ -83,11 +86,39 @@ export class PokemonListComponent {
 
   searchPokemon(pokemonName: string){
     //Nav to the specified URL
+    this.goSound()
     this.router.navigate(['', pokemonName.toLowerCase()]);
+    
   }
 
   goToHomePage() {
     this.router.navigate(['/']);
   }
 
+
+
+  //Sounds
+  goSound(){
+    var go = new Audio('../assets/select2.wav');
+    go.play();
+  }
+
+  prevSound(){
+    var prev = new Audio('../assets/prev.wav');
+    prev.play();
+  }
+
+  nextSound(){
+    var next = new Audio('../assets/next.wav');
+    next.play();
+  }
+
+  selectSound(){
+    var select = new Audio('../assets/select.wav');
+    select.play()
+  }
+
+  
+
+    
 }

@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'PressStart2P-Regular';
+    src: url('/Users/scuser/Downloads/Press_Start_2P');
+}
+
+
+.header {
+    background-image: url('../assets/pokeBanner.jpeg');
+    background-size: cover;
+    height: 250px;
+
+} 
+
+.header img {
+    padding-left: 210px;
+    padding-top: 50px;
+} 
+
+p {
+    font-family: PressStart2P-Regular;
+    color: #eeb7b7;
+}
+
+
+
+
+
+

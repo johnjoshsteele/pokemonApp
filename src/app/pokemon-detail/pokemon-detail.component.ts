@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
   templateUrl: './pokemon-detail.component.html',
   styleUrls: ['./pokemon-detail.component.scss']
 })
+
 export class PokemonDetailComponent {
 
   public name$: Observable<string>;
@@ -24,12 +25,24 @@ export class PokemonDetailComponent {
   }
 
   goBack() {
+    this.backSound()
     this.location.back();
   }
 
   goToId(id: number){
+    this.scrollSound()
     this.router.navigate(['/', id], 
     {skipLocationChange: true}
     );
+  }
+
+  scrollSound(){
+    var scroll = new Audio('../assets/scroll.wav');
+    scroll.play();
+  }
+
+  backSound(){
+    var back = new Audio('../assets/prev.wav');
+    back.play();
   }
 }
