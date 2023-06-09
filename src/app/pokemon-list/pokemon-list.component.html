@@ -16,7 +16,12 @@
 </div>
 
 <div class="search">
-    <input type="text" placeholder="search" #pokemonName/>
+    <input (keydown.enter)="searchPokemon(pokemonName.value)" (input)="suggestPokemon(pokemonName.value)" type="text" placeholder="search" #pokemonName/>
+    <div class="dropdown">
+        <li *ngFor="let name of this.filtered">
+            {{name}}
+        </li>
+    </div>
     <button (click)="searchPokemon(pokemonName.value)">go</button>
 </div>
 

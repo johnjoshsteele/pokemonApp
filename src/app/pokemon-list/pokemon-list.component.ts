@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { Observable, concatMap, map, tap } from 'rxjs';
 import { Pokemon } from '../models/pokemon';
@@ -17,11 +17,14 @@ export class PokemonListComponent{
   public pageOffset : number = 0;
   public count!: number;
   private firstVisit!: boolean;
+  public names: string[] = []; 
+  public filtered: string[] = [];
 
   constructor(
     public pokemonService: PokemonService,
     public route: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public cdr: ChangeDetectorRef
     ){
     route.queryParams.subscribe(p => console.log(p))
 
@@ -37,9 +40,14 @@ export class PokemonListComponent{
       map((pl) => pl.map((p) => new Pokemon(p.name!, p.url!)))
       )
 
-      this.pokemonService.getCount().subscribe(count => {
-        this.count = count
-      })
+    this.pokemonService.getCount().subscribe(count => {
+      this.count = count
+    })
+
+    this.pokemonService.listPokemon(0, 100000)
+    .subscribe(res => res.map(p => this.names.push(p.name!))) 
+
+    console.log(this.names)
   }
 
   setListSize(listSize: number){
@@ -88,6 +96,22 @@ export class PokemonListComponent{
     //Nav to the specified URL
     this.goSound()
     this.router.navigate(['', pokemonName.toLowerCase()]);
+  }
+
+  suggestPokemon(input : string){
+    this.filtered = [];
+
+    for (const i of this.names){
+      if (i.startsWith(input)) {
+        this.filtered.push(i);
+      }
+    }
+
+    if (input.length < 1){
+      this.filtered = []
+    }
+
+    this.cdr.detectChanges()
     
   }
 
