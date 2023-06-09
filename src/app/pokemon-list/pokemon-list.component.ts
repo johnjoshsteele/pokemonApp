@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class PokemonListComponent {
   public pokemon$: Observable<Pokemon[]>;
-  public listSize : number = 20;
+  public listSize : number = 12;
   public pageOffset : number = 0;
   public count!: number;
 
@@ -31,7 +31,7 @@ export class PokemonListComponent {
     
     this.pokemon$ = route.queryParams
     .pipe(
-      tap(qp => this.listSize = qp['listSize'] || 20),
+      tap(qp => this.listSize = parseInt(qp['listSize']) || 12),
       concatMap(qp => this.pokemonService.listPokemon(qp['offset'], qp['listSize'])),
       map((pl) => pl.map((p) => new Pokemon(p.name!, p.url!)))
       )
@@ -53,7 +53,7 @@ export class PokemonListComponent {
   prevPage(){
 
     const offset = this.route.snapshot.queryParams['offset'] || 0;
-    const size = this.route.snapshot.queryParams['size'] || 10;
+    const size = this.route.snapshot.queryParams['size'] || 12;
 
     this.pageOffset = parseInt(offset) - parseInt(size);
     if (this.pageOffset < 0){
@@ -69,7 +69,7 @@ export class PokemonListComponent {
     nextPage(){
       
       const offset = this.route.snapshot.queryParams['offset'] || 0;
-      const size = this.route.snapshot.queryParams['size'] || 10;
+      const size = this.route.snapshot.queryParams['size'] || 12;
       
       this.pageOffset = parseInt(offset) + parseInt(size);
       if (this.count < this.pageOffset){
@@ -89,4 +89,5 @@ export class PokemonListComponent {
   goToHomePage() {
     this.router.navigate(['/']);
   }
+
 }

@@ -100,6 +100,8 @@ select {
 .search input {
     border-radius: 5px;
     padding: 10px 20px;
+    background-color: #eeb7b7;
+    font-family: PressStart2P-Regular;
 }
 
 p {
@@ -111,5 +113,5 @@ p {
     font-family: PressStart2P-Regular;
     color: #eeb7b7;
     position: relative;
-    left: 39%;
-}
+    text-align: center;
+} 

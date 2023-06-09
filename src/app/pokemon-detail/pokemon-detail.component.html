@@ -4,17 +4,33 @@
     </a>
 </div>
 
-<div class="card">
-    <ng-container *ngIf="pokemon$ | async as pokemon; else notFound" class="container">
-      <h1>{{pokemon.name}}</h1>
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/{{pokemon.id}}.png">
-      <p>type(s):</p>
-      <p *ngFor="let type of pokemon.types">{{type.type?.name}}</p>
-      <p>weight: {{pokemon.weight}}</p>
-      <p>height: {{pokemon.height}}</p>
-      <p>base experience: {{pokemon.base_experience}}</p>
+
+
+<div class="wrapper">
+
+  <ng-container *ngIf="pokemon$ | async as pokemon; else notFound" class="container">
+  <button (click)="goToId(pokemon.id - 1)" type="button"><</button>
+
+  <div class="card">
+        <h1>{{pokemon.name}}</h1>
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.id}}.png">
+        <p>type(s):</p>
+        <p *ngFor="let type of pokemon.types">{{type.type?.name}}</p>
+        <p>------------------</p>
+        <p>abilities:</p>
+        <p *ngFor="let ability of pokemon.abilities">{{ability.ability?.name}}</p>
+        <p>------------------</p>
+        <p>weight: {{pokemon.weight / 10}}kg</p>
+        <p>height: {{pokemon.height / 10}}m</p>
+        <p>base experience: {{pokemon.base_experience}}</p>
+      </div>
+      
+      <button (click)="goToId(pokemon.id + 1)"type="button">></button>
     </ng-container>
-  </div>
+
+</div>
+
+
 
 <button type="button" (click)="goBack()">back</button>
   

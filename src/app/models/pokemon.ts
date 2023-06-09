@@ -1,11 +1,12 @@
 export class Pokemon{
     name?: string;
-    id?: number;
+    id!: number;
     types?: { slot: ''; type?: { name?: ''; url?: '' } }[];
-    weight?: string;
-    height?: string;
+    weight!: number;
+    height!: number;
     base_experience?: string;
     url?: string;
+    abilities?: { slot: ''; ability?: {name?: ''; url?: '' } }[];
 
     constructor(name: string, url: string) {
         this.name = name;

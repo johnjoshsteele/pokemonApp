@@ -8,12 +8,13 @@ import { ListAPIResponse } from './models/list-api-response';
 @Injectable({
   providedIn: 'root'
 })
+
 export class PokemonService {
   private url = "https://pokeapi.co/api/v2/"
 
   constructor(private http: HttpClient) {}
 
-  public listPokemon(pageOffset = 0, limit = 20) {
+  public listPokemon(pageOffset = 0, limit = 12) {
     const params = {
       limit : limit,
       offset : pageOffset

@@ -29,17 +29,17 @@
 <div class="grid-container">
     <div class="poke" *ngFor="let pokemon of pokemon$ | async">
       <a [routerLink]="['/',pokemon.name]">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/{{pokemon.id}}.png">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.id}}.png">
       <br>
       <h3>{{pokemon.name}}</h3></a>
     </div>
   </div>
   
 <div>
-    <button class="prevButton" (click)="prevPage()">prev</button> 
     <div class = "pageNum">
         {{this.pageOffset + 1}} - {{this.pageOffset + this.listSize}} / {{this.count}}
     </div>
+    <button class="prevButton" (click)="prevPage()">prev</button> 
     <button class="nextButton" (click)="nextPage()">next</button>
 </div>
   
