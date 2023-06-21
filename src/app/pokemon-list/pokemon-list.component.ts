@@ -4,7 +4,6 @@ import { Observable, concatMap, map, tap } from 'rxjs';
 import { Pokemon } from '../models/pokemon';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
