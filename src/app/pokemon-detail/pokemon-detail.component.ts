@@ -15,12 +15,12 @@ import { Location } from '@angular/common';
 
 export class PokemonDetailComponent {
 
-  public name$: Observable<string>;
-  public pokemon$: Observable<Pokemon>;
+  public id$: Observable<string>;
+  public pokemon$: Observable<any>;
 
   constructor(public activatedRoute: ActivatedRoute, public pokemonService: PokemonService, private location: Location, private router: Router){
-    this.name$ = activatedRoute.params.pipe(map(p => p['name']));
-    this.pokemon$ = this.name$.pipe(concatMap(n => this.pokemonService.getPokemon(n)))
+    this.id$ = activatedRoute.params.pipe(map(p => p['id']));
+    this.pokemon$ = this.id$.pipe(concatMap(i => this.pokemonService.getPokemon(i)))
     //pipe is for if you want to do some sort of manipulation w the later defined function w fat arrows
   }
 

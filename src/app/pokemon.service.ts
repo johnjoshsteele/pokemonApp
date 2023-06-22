@@ -10,27 +10,23 @@ import { ListAPIResponse } from './models/list-api-response';
 })
 
 export class PokemonService {
-  private url = "https://pokeapi.co/api/v2/"
+  private url = "https://localhost:7231/api/"
 
   constructor(private http: HttpClient) {}
 
   public listPokemon(pageOffset = 0, limit = 12) {
-    const params = {
-      limit : limit,
-      offset : pageOffset
-    };
     return this.http
-      .get<ListAPIResponse>(`${this.url}pokemon`, {params: params})
-      .pipe(map(res => res.results))
+      .get<any>(`${this.url}Pokemon`)
+      .pipe(map(res => res))
   }
+  
 
-  public getPokemon(name: string) {
-    name = name.toLowerCase()
-    return this.http.get<any>(`${this.url}pokemon/${name}`)
+  public getPokemon(id: string) {
+    return this.http.get<any>(`${this.url}Pokemon?id=${id}`)
   }
 
   public getCount(){
-    return this.http.get<any>(`${this.url}pokemon`).pipe(map(res => res.count))
+    return this.http.get<any>(`${this.url}Pokemon`).pipe(map(res => res.count))
   }
 
 }

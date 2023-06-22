@@ -11,11 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class PokemonListComponent{
-  public pokemon$: Observable<Pokemon[]>;
+  public pokemon$: Observable<any[]>;
   public listSize : number = 12;
   public pageOffset : number = 0;
   public count!: number;
-  private firstVisit!: boolean;
   public names: string[] = []; 
   public filtered: string[] = [];
 
@@ -26,25 +25,15 @@ export class PokemonListComponent{
     public cdr: ChangeDetectorRef
     ){
     route.queryParams.subscribe(p => console.log(p))
-
-    this.pokemon$ = this.pokemonService.listPokemon(
-      this.pageOffset,
-      this.listSize
-    )
     
-    this.pokemon$ = route.queryParams
-    .pipe(
-      tap(qp => this.listSize = parseInt(qp['listSize']) || 12),
-      concatMap(qp => this.pokemonService.listPokemon(qp['offset'], qp['listSize'])),
-      map((pl) => pl.map((p) => new Pokemon(p.name!, p.url!)))
-      )
+    this.pokemon$ = this.pokemonService.listPokemon();
 
     this.pokemonService.getCount().subscribe(count => {
       this.count = count
     })
 
-    this.pokemonService.listPokemon(0, 100000)
-    .subscribe(res => res.map(p => this.names.push(p.name!))) 
+    //this.pokemonService.listPokemon(0, 100000)
+    //.subscribe(res => res.map(p => this.names.push(p.name!))) 
 
     console.log(this.names)
   }
